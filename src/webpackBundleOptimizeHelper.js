@@ -30,7 +30,7 @@ function getEntrypointAssets(entrypoints) {
 
 function entrypointsContainsJS(entrypoints) {
   return (
-    getEntrypointAssets(entrypoints).filter(asset => asset.indexOf('.js') > 0)
+    getEntrypointAssets(entrypoints).filter(asset => typeof asset.indexOf == 'function' && asset.indexOf('.js') > 0)
       .length > 0
   )
 }
