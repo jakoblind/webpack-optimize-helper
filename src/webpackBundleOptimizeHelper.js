@@ -24,8 +24,14 @@ const getDependencyNameFromModuleName = m => {
 }
 
 function getEntrypointAssets(entrypoints) {
-  const entrypointKeys = Object.keys(entrypoints)
-  return flatMap(entrypoint => entrypoints[entrypoint].assets, entrypointKeys)
+  const entrypointKeys = Object.keys(entrypoints);
+  return flatMap(
+    (entrypoint) => entrypoints[entrypoint].assets,
+    entrypointKeys
+  ).map((asset) => {
+    // Webpack 5 uses an object and webpack 4 a string
+    return typeof asset == "string" ? asset : asset.name;
+  });
 }
 
 function entrypointsContainsJS(entrypoints) {
